@@ -256,7 +256,7 @@ The URI resource is compatible with [ERC-1155 JSON Schema](https://github.com/et
       "properties": {
         "creators": {
           "type": "array",
-          "description": "Contains list of creators, each with Solana address and share of the nft"
+          "description": "Contains list of creators, each with Solana address and share of the nft",
 	  "items": {
             "type": "object",
             "properties": {
