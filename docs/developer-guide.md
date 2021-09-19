@@ -228,41 +228,57 @@ The URI resource is compatible with [ERC-1155 JSON Schema](https://github.com/et
 
 ```jsx
 {
-    "title": "Token Metadata",
-    "type": "object",
+  "title": "Token Metadata",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Identifies the asset to which this token represents"
+    },
+    "description": {
+      "type": "string",
+      "description": "Describes the asset to which this token represents"
+    },
+    "image": {
+      "type": "string",
+      "description": "A URI pointing to a resource with mime type image/* representing the asset to which this token represents. Consider making any images at a width between 320 and 1080 pixels and aspect ratio between 1.91:1 and 4:5 inclusive."
+    },
+    "external_url": {
+      "type": "string",
+      "description": "A URI pointing to an external resource that will take user outside of the platform."
+    },
+    "seller_fee_basis_points": {
+      "type": "number"
+    },
     "properties": {
-        "name": {
-            "type": "string",
-            "description": "Identifies the asset to which this token represents"
-        },
-        "description": {
-            "type": "string",
-            "description": "Describes the asset to which this token represents"
-        },
-        "image": {
-            "type": "string",
-            "description": "A URI pointing to a resource with mime type image/* representing the asset to which this token represents. Consider making any images at a width between 320 and 1080 pixels and aspect ratio between 1.91:1 and 4:5 inclusive."
-        },
-				"external_url": {
-            "type": "string",
-            "description": "A URI pointing to an external resource that will take user outside of the platform."
-        },
-				"seller_fee_basis_points": {
-						"type": "number",
-						
-				},
-        "properties": {
+      "type": "object",
+      "description": "Arbitrary properties. Values may be strings, numbers, object or arrays.",
+      "properties": {
+        "creators": {
+          "type": "array",
+          "description": "Contains list of creators, each with Solana address and share of the nft"
+	  "items": {
             "type": "object",
-            "description": "Arbitrary properties. Values may be strings, numbers, object or arrays.",
-				    "properties": {
-								"creators": {
-										"type": "array",
-										"description": "Contains list of creators, each with Solana address and share of the nft"
-								},
-						}
+            "properties": {
+              "address": {
+                "type": "string",
+                "description": "A Solana address",
+                "pattern": "[1-9A-HJ-NP-Za-km-z]{32,44}"
+              },
+              "share": {
+                "type": "number",
+                "description": "Percentage of royalties to send to this address, represented as a percentage (0-100). The sum of all shares must equal 100",
+                "exclusiveMinimum": 0,
+                "maximum": 100
+              }
+            }
+          }
         }
+      }
     }
+  }
 }
+
 ```
 
 ## Token Vault
